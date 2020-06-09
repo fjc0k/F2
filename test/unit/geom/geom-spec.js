@@ -294,14 +294,18 @@ describe('test geoms', function() {
     it('test mapping', function() {
       const data = [
         { a: 1, b: [ 1, 2 ], c: '1' },
+        { a: 2, b: [ 1, 2 ], c: '1' },
         { a: 2, b: [ 2, 3 ], c: '2' }
       ];
+      geom.position('a*b').color('c');
       geom._beforeMapping([ data ]);
       const mappedData = geom._mapping(data);
       const obj1 = mappedData[0];
       expect(obj1.x).equal(50);
       expect(obj1.y).eqls([ 100, 200 ]);
-      expect(obj1.color).equal('red');
+      expect(obj1.color).equal('#1890FF');
+      expect(mappedData[1].color).equal('#1890FF');
+      expect(mappedData[2].color).equal('#2FC25B');
     });
 
     it('test paint', function() {
